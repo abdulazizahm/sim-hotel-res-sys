@@ -1,0 +1,280 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Awesome Search Box</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/sty.css">
+	<link rel="stylesheet" type="text/css" href="styles/css.css">
+	<style>
+		
+.autocomplete-items {
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+	</style>
+  </head>
+  <!-- Coded with love by Mutiullah Samim-->
+  <body>
+    <div class="container h-100">
+	<form method="post">
+      <div class="d-flex justify-content-center h-100">
+        <div class="searchbar">
+				<input class="search_input" id="myInput" type="text" name="customername" placeholder="Customer Name">
+				<a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+      </div>
+	<form>
+	<div id="invoice" style="display:none">
+    <div class="toolbar hidden-print">
+        <div class="text-right">
+            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+        </div>
+        <hr>
+    </div>
+    <div class="invoice overflow-auto">
+        <div style="min-width: 600px">
+            <header>
+                <div class="row">
+                    <div class="col">
+                        <a target="_blank" href="#">
+                            <img src="images/lobiadmin-logo-text-64.png" data-holder-rendered="true" />
+                            </a>
+                    </div>
+                    <div class="col company-details">
+                        <h2 class="name">
+                            <a target="_blank" href="#">
+                            The River
+                            </a>
+                        </h2>
+                        <div>455 Foggy Heights, AZ 85004, US</div>
+                        <div>0183-12345678</div>
+                        <div>river_hotel@gamil.com</div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="row contacts">
+                    <div class="col invoice-to">
+                        <div class="text-gray-light">INVOICE TO:</div>
+                        <h2 class="to" id="cname">John Doe ddsc</h2>
+                        <div class="address">credit number : <span id="credit">54454556214568</span></div>
+                        <div class="email" >the number of room : <span id="room_number">5</span></div>
+                        <div class="email" > room price for one night = $200 </div>
+                    </div>
+                    <div class="col invoice-details">
+                        <h1 class="invoice-id">INVOICE <span id="cid">2</span></h1>
+                        <div class="date" >Date of Invoice : <span id="check-in">2019-6-7</span></div>
+                        <div class="date" id="check-out">Due Date : <span id="check-in">2019-6-8</span></div>
+                    </div>
+                </div>
+				<div class="table-responsible">
+                <table border="0" cellspacing="0" cellpadding="0" class=>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-left">order name</th>
+							<th class="text-right">the time of order</th>
+                            <th class="text-right">order price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="no"><span id="id">1</span></td>
+                            <td class="text-left">
+							<h3 id="ordername"></h3>
+                            </td>
+                            <td class="unit" id="time">0.00</td>
+                            <td class="qty" id="orderprice">$100</td>
+                        </tr>
+                         <tr>
+                            <td class="no"><span id="id">2</span></td>
+                            <td class="text-left">
+							<h3 id="ordername"></h3>
+                            </td>
+                            <td class="unit" id="time">0.00</td>
+                            <td class="qty" id="orderprice">$200</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td >TOTAL of price for restrant</td>
+                            <td >$5,200.00</td>
+                        </tr>
+						<tr>
+                            <td colspan="2"></td>
+                            <td >TOTAL of price for room</td>
+                            <td >$5,200.00</td>
+                        </tr>
+						<tr>
+                            <td colspan="2"></td>
+                            <td >TOTAL</td>
+                            <td >$5,200.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+				</div>
+            </main>
+            <footer>
+                Invoice was created on a computer and is valid without the signature and seal.
+            </footer>
+        </div>
+        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+        <div></div>
+    </div>
+</div>
+    </div>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+
+	<script>
+	$.ajax({
+		"type": "POST",
+		"url": "process.php",
+		"data": {"cnames":""},
+		"success": function(response)
+		{
+			
+			console.log(response);
+			console.log(typeof(response));
+			response=response.replace(/\[/g, '');
+			response=response.replace(/\]/g, '');
+			response=response.replace(/\"/g, '');
+			var countries= response.split(",");
+			console.log(countries);
+			autocomplete(document.getElementById("myInput"),countries);
+			
+		}
+	});
+  function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+$(".search_icon").click(function(e)
+{
+	alert("submit");
+	$("#invoice").show();
+});
+
+	</script>
+  </body>
+</html>

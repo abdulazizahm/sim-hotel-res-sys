@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax MySQL search with PHP and JQuery</title>
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/css.css">
+</head>
+<body>
+    <!-- Text input to enter the employee's name -->
+	
+   <!-- <input type="text" class="block" id="employee_name" style="">-->
+    <!-- Our search button --> 
+    <!--<input type="button" id="search_button" value="Search">-->
+    <!-- This div will contain a list of all employee names that match our search term -->
+    <!--<div id="search_results" style="padding:5px;"></div>
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!--Author      : @arboshiki-->
+<div id="invoice">
+
+    <div class="toolbar hidden-print">
+        <div class="text-right">
+            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+        </div>
+        <hr>
+    </div>
+    <div class="invoice overflow-auto">
+        <div style="min-width: 600px">
+            <header>
+                <div class="row">
+                    <div class="col">
+                        <a target="_blank" href="#">
+                            <img src="images/lobiadmin-logo-text-64.png" data-holder-rendered="true" />
+                            </a>
+                    </div>
+                    <div class="col company-details">
+                        <h2 class="name">
+                            <a target="_blank" href="#">
+                            The River
+                            </a>
+                        </h2>
+                        <div>455 Foggy Heights, AZ 85004, US</div>
+                        <div>0183-12345678</div>
+                        <div>river_hotel@gamil.com</div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="row contacts">
+                    <div class="col invoice-to">
+                        <div class="text-gray-light">INVOICE TO:</div>
+                        <h2 class="to" id="cname">John Doe ddsc</h2>
+                        <div class="address">credit number : <span id="credit">54454556214568</span></div>
+                        <div class="email" >the number of room : <span id="room_number">5</span></div>
+                        <div class="email" > room price for one night = $200 </div>
+                    </div>
+                    <div class="col invoice-details">
+                        <h1 class="invoice-id">INVOICE <span id="cid">2</span></h1>
+                        <div class="date" >Date of Invoice : <span id="check-in">2019-6-7</span></div>
+                        <div class="date" id="check-out">Due Date : <span id="check-in">2019-6-8</span></div>
+                    </div>
+                </div>
+				<div class="table-responsible">
+                <table border="0" cellspacing="0" cellpadding="0" class=>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-left">order name</th>
+							<th class="text-right">the time of order</th>
+                            <th class="text-right">order price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="no"><span id="id">1</span></td>
+                            <td class="text-left">
+							<h3 id="ordername"></h3>
+                            </td>
+                            <td class="unit" id="time">0.00</td>
+                            <td class="qty" id="orderprice">$100</td>
+                        </tr>
+                         <tr>
+                            <td class="no"><span id="id">2</span></td>
+                            <td class="text-left">
+							<h3 id="ordername"></h3>
+                            </td>
+                            <td class="unit" id="time">0.00</td>
+                            <td class="qty" id="orderprice">$200</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td >TOTAL of price for restrant</td>
+                            <td >$5,200.00</td>
+                        </tr>
+						<tr>
+                            <td colspan="2"></td>
+                            <td >TOTAL of price for room</td>
+                            <td >$5,200.00</td>
+                        </tr>
+						<tr>
+                            <td colspan="2"></td>
+                            <td >TOTAL</td>
+                            <td >$5,200.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+				</div>
+            </main>
+            <footer>
+                Invoice was created on a computer and is valid without the signature and seal.
+            </footer>
+        </div>
+        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+        <div></div>
+    </div>
+</div>
+<!-- JQuery library -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+ $('#printInvoice').click(function(){
+            Popup($('.invoice')[0].outerHTML);
+            function Popup(data) 
+            {
+                window.print();
+                return true;
+            }
+ });
+    //Add a JQuery click listener to our search button.
+    $('#search_button').click(function(){
+        //If the search button is clicked,
+        //get the employee name that is being search for
+        //from the search_box.
+        var employee_name = $('#employee_name').val().trim();
+ 
+        //Carry out a GET Ajax request using JQuery
+        $.ajax({
+            //The URL of the PHP file that searches MySQL.
+            url: 'search.php',
+            data: {
+                name: employee_name
+            },
+            success: function(returnData){
+                //Set the inner HTML of our search_results div to blank to
+                //remove any previous search results.
+                $('#search_results').html('');
+                //Parse the JSON that we got back from search.php
+                var results = JSON.parse(returnData);
+                //Loop through our employee array and append their
+                //names to our search results div.
+                $.each(results, function(key, value){
+                    //The name of the employee will be present
+                    //in the "name" property.
+                    $('#search_results').append(value.name + '<br>');
+                });
+                //If no employees match the name that was searched for, display a
+                //message saying that no results were found.
+                if(results.length == 0){
+                    $('#search_results').html('No employees with that name were found!');
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
